@@ -42,7 +42,25 @@ app.post("/addIdea", (req, res) => {
         let connection;
         try {
             connection = await pool.getConnection();
-            await connection.query(`INSERT INTO ideas_db.ideas (idea) VALUES ('${idea}');`);
+            await connection.query(`INSERT INTO ideas_db.ideas (idea) VALUES ("${idea}");`);
+            res.status(200).send();
+        } catch(err) {
+            throw err;
+        } finally {
+            if (connection) connection.end();
+        }
+        res.status(500).send();
+    })()
+});
+
+app.delete("/deleteIdea", (req, res) => {
+    console.log(req.body);
+    const id = req.body.id;
+    (async () => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            await connection.query(`DELETE FROM ideas_db.ideas WHERE id=${id};`);
             res.status(200).send();
         } catch(err) {
             res.status(500).send();
@@ -51,12 +69,6 @@ app.post("/addIdea", (req, res) => {
             if (connection) connection.end();
         }
     })()
-});
-
-app.delete("/deleteIdea", (req, res) => {
-    console.log(req.body);
-    const idea = req.body.idea;
-    
 });
 
 app.listen(process.env.PORT, () => {

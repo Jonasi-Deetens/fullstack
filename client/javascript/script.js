@@ -20,6 +20,7 @@ const deleteIdea = async (id) => {
         if (response.ok) {
             // Handle successful response if needed
             console.log("Idea deleted successfully!");
+            fetchIdeas();
         } else {
             // Handle error response
             console.error("Error deleting idea:", response.status);
@@ -37,10 +38,11 @@ const generateList = (data) => {
         const li = document.createElement("li");
         li.textContent = listItem.idea;
 
-        const button = document.createElement("button");
-        button.textContent = "X";
-        button.style.color = "red";
-        button.addEventListener("click", () => deleteIdea(listItem.id))
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "X";
+        removeButton.style.color = "red";
+        removeButton.addEventListener("click", () => deleteIdea(listItem.id))
+        li.appendChild(removeButton);
 
         ul.appendChild(li);
     });
