@@ -8,6 +8,7 @@ const clearList = () => {
 
 const generateList = (data) => {
     clearList();
+    console.log(data)
     data.forEach(listItem => {
         const li = document.createElement("li");
         li.textContent = listItem.idea;
@@ -18,7 +19,7 @@ const generateList = (data) => {
 const fetchIdeas = async () => {
     try {
         const data = await fetch("http://localhost:4000/ideas");
-        const results = data.json();
+        const results = await data.json();
         generateList(results);
     } catch (error) {
         console.log(error);
