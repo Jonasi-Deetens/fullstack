@@ -3,7 +3,7 @@ document.getElementById("ideaForm").addEventListener("submit", async (event) => 
     const idea = document.getElementById("idea").value;
     console.log(idea);
     try {
-        const response = await fetch("http://localhost:4000/addIdea", {
+        const response = await fetch("http://localhost:4000/ideas/addIdea", {
             method: "POST",
             mode: "cors",
             headers: {

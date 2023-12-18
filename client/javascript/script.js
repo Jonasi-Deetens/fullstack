@@ -8,7 +8,7 @@ const clearList = () => {
 
 const deleteIdea = async (id) => {
     try {
-        const response = await fetch("http://localhost:4000/deleteIdea", {
+        const response = await fetch("http://localhost:4000/ideas/deleteIdea", {
             method: "DELETE",
             mode: "cors",
             headers: {
