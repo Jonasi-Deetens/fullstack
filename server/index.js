@@ -14,7 +14,10 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 });
 
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/ideas", (req, res) => {
@@ -40,13 +43,20 @@ app.post("/addIdea", (req, res) => {
         try {
             connection = await pool.getConnection();
             await connection.query(`INSERT INTO ideas_db.ideas (idea) VALUES ('${idea}');`);
+            res.status(200).send();
         } catch(err) {
+            res.status(500).send();
             throw err;
         } finally {
             if (connection) connection.end();
         }
     })()
-    res.status(200).send();
+});
+
+app.delete("/deleteIdea", (req, res) => {
+    console.log(req.body);
+    const idea = req.body.idea;
+    
 });
 
 app.listen(process.env.PORT, () => {
