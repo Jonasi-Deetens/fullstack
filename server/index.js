@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mariadb from "mariadb";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -14,6 +15,7 @@ const pool = mariadb.createPool({
 });
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/ideas", (req, res) => {
     (async () => {
@@ -28,6 +30,23 @@ app.get("/ideas", (req, res) => {
             if (connection) connection.end();
         }
     })()
+});
+
+app.post("/addIdea", (req, res) => {
+    console.log(req.body);
+    const idea = req.body.idea;
+    (async () => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            await connection.query(`INSERT INTO ideas_db.ideas (idea) VALUES ('${idea}');`);
+        } catch(err) {
+            throw err;
+        } finally {
+            if (connection) connection.end();
+        }
+    })()
+    res.status(200).send();
 });
 
 app.listen(process.env.PORT, () => {
