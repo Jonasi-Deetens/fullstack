@@ -24,6 +24,7 @@ router.post("/addIdea", (req, res) => {
     const title = req.body.title;
     const idea = req.body.idea;
     const mysqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    
     (async () => {
         let connection;
         try {
@@ -43,6 +44,7 @@ router.post("/addIdea", (req, res) => {
 router.delete("/deleteIdea", (req, res) => {
     console.log(req.body);
     const id = req.body.id;
+
     (async () => {
         let connection;
         try {
@@ -61,6 +63,26 @@ router.delete("/deleteIdea", (req, res) => {
 
 router.put("/updateIdea", (req, res) => {
     console.log(req.body);
+    const id = req.body.id;
+    const title = req.body.title;
+    const idea = req.body.idea;
+
+    (async () => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            const prepare = await connection.prepare(`UPDATE ideas_db.ideas
+                                                        SET title = ?, idea = ?
+                                                        WHERE id= ?;`);
+            prepare.execute([title, idea, id])
+            res.status(200).send();
+        } catch(err) {
+            res.status(500).send();
+            throw err;
+        } finally {
+            if (connection) connection.end();
+        }
+    })()
 });
 
 export default router;

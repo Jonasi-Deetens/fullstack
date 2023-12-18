@@ -44,6 +44,11 @@ const generateList = (data) => {
         removeButton.addEventListener("click", () => deleteIdea(listItem.id))
         li.appendChild(removeButton);
 
+        const a = document.createElement("a");
+        a.href = "./src/putIdea/index.html?id=" + listItem.id + "&title=" + listItem.title + "&idea=" + listItem.idea;
+        a.textContent = "Edit";
+        li.appendChild(a);
+
         ul.appendChild(li);
     });
 };

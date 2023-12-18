@@ -1,10 +1,11 @@
 document.getElementById("updateIdeaForm").addEventListener("submit", async (event) => {
     event.preventDefault();
+    const title = document.getElementById("titleInput").value;
     const idea = document.getElementById("ideaInput").value;
     const id = document.getElementById("ideaID").value;
     console.log(idea + " " + id);
     try {
-        const response = await fetch("http://localhost:4000/updateIdea", {
+        const response = await fetch("http://localhost:4000/ideas/updateIdea", {
             method: "PUT",
             mode: "cors",
             headers: {
@@ -12,19 +13,24 @@ document.getElementById("updateIdeaForm").addEventListener("submit", async (even
               },
             body: JSON.stringify({ 
                 idea: idea,
-                id: id
+                id: id,
+                title: title
             })
         });
         if (response.ok) {
-            // Handle successful response if needed
             window.location.href = "../../index.html";
             console.log("Idea changed successfully!");
         } else {
-            // Handle error response
             console.error("Error changing idea:", response.status);
         }
     } catch (error) {
-        // Handle fetch request error
         console.error("Fetch error:", error);
     }
 })
+
+const params = new URLSearchParams(window.location.search);
+console.log(params);
+
+document.getElementById("titleInput").value = params.get("title");
+document.getElementById("ideaInput").value = params.get("idea");
+document.getElementById("ideaID").value = params.get("id");
