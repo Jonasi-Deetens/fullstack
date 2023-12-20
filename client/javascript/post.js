@@ -4,7 +4,7 @@ document.getElementById("ideaForm").addEventListener("submit", async (event) => 
     const title = document.getElementById("title").value;
     console.log(idea);
     try {
-        const response = await fetch("http://localhost:4000/ideas/addIdea", {
+        const response = await fetch("http://localhost:3000/ideas/addIdea", {
             method: "POST",
             mode: "cors",
             headers: {

@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
         let connection;
         try {
             connection = await pool.getConnection();
-            const data = await connection.query(`SELECT * FROM ideas_db.ideas`);
+            const data = await connection.query(`SELECT * FROM ideas`);
             res.send(data);
         } catch(err) {
             throw err;
@@ -29,7 +29,7 @@ router.post("/addIdea", (req, res) => {
         let connection;
         try {
             connection = await pool.getConnection();
-            const prepare = await connection.prepare(`INSERT INTO ideas_db.ideas (title, idea, created_at) VALUES (?, ?, ?);`);
+            const prepare = await connection.prepare(`INSERT INTO ideas (title, idea, created_at) VALUES (?, ?, ?);`);
             prepare.execute([title, idea, mysqlTimestamp])
             res.status(200).send();
         } catch(err) {
@@ -49,7 +49,7 @@ router.delete("/deleteIdea", (req, res) => {
         let connection;
         try {
             connection = await pool.getConnection();
-            const prepare = await connection.prepare(`DELETE FROM ideas_db.ideas WHERE id=?`);
+            const prepare = await connection.prepare(`DELETE FROM ideas WHERE id=?`);
             prepare.execute([id])
             res.status(200).send();
         } catch(err) {
@@ -71,7 +71,7 @@ router.put("/updateIdea", (req, res) => {
         let connection;
         try {
             connection = await pool.getConnection();
-            const prepare = await connection.prepare(`UPDATE ideas_db.ideas
+            const prepare = await connection.prepare(`UPDATE ideas
                                                         SET title = ?, idea = ?
                                                         WHERE id= ?;`);
             prepare.execute([title, idea, id])

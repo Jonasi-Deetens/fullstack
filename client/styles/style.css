@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #d7e5ec;
+    text-align: center;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    font-size: 3em;
+    font-weight: bold;
+    height: 100svh;
+}
+
+#footer {
+    background-color: white;
+    padding: 5px;
+    margin: 0;
+}
+
+#landing-picture {
+    width: 33%;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0px 0px 1px black);
+}

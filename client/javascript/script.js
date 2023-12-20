@@ -8,7 +8,7 @@ const clearList = () => {
 
 const deleteIdea = async (id) => {
     try {
-        const response = await fetch("http://localhost:4000/ideas/deleteIdea", {
+        const response = await fetch("http://localhost:3000/ideas/deleteIdea", {
             method: "DELETE",
             mode: "cors",
             headers: {
@@ -36,7 +36,12 @@ const generateList = (data) => {
     console.log(data)
     data.forEach(listItem => {
         const li = document.createElement("li");
-        li.textContent = listItem.idea;
+        li.textContent = listItem.title + " - " + listItem.idea;
+
+        const img = document.createElement("img");
+        img.src = "./images/bulb-icon.png";
+        img.classList.add("icon");
+        li.prepend(img);
 
         const removeButton = document.createElement("button");
         removeButton.textContent = "X";
@@ -55,7 +60,7 @@ const generateList = (data) => {
 
 const fetchIdeas = async () => {
     try {
-        const data = await fetch("http://localhost:4000/ideas");
+        const data = await fetch("http://localhost:3000/ideas");
         const results = await data.json();
         generateList(results);
     } catch (error) {
