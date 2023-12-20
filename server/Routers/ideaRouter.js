@@ -23,14 +23,13 @@ router.post("/addIdea", (req, res) => {
     console.log(req.body);
     const title = req.body.title;
     const idea = req.body.idea;
-    const mysqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     
     (async () => {
         let connection;
         try {
             connection = await pool.getConnection();
-            const prepare = await connection.prepare(`INSERT INTO ideas (title, idea, created_at) VALUES (?, ?, ?);`);
-            prepare.execute([title, idea, mysqlTimestamp])
+            const prepare = await connection.prepare(`INSERT INTO ideas (title, idea) VALUES (?, ?);`);
+            prepare.execute([title, idea])
             res.status(200).send();
         } catch(err) {
             throw err;
