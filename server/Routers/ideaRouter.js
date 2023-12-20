@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
             const data = await connection.query(`SELECT * FROM ideas`);
             res.send(data);
         } catch(err) {
-            throw err;
+            res.send(err);
         } finally {
             if (connection) connection.end();
         }
