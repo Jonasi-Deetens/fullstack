@@ -8,7 +8,7 @@ const clearList = () => {
 
 const deleteIdea = async (id) => {
     try {
-        const response = await fetch("http://localhost:3000/ideas/deleteIdea", {
+        const response = await fetch("https://server-diaibk8c.b4a.run/ideas/deleteIdea", {
             method: "DELETE",
             mode: "cors",
             headers: {
@@ -60,7 +60,7 @@ const generateList = (data) => {
 
 const fetchIdeas = async () => {
     try {
-        const data = await fetch("http://localhost:3000/ideas");
+        const data = await fetch("https://server-diaibk8c.b4a.run/ideas/");
         const results = await data.json();
         generateList(results);
     } catch (error) {

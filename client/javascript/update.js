@@ -5,7 +5,7 @@ document.getElementById("updateIdeaForm").addEventListener("submit", async (even
     const id = document.getElementById("ideaID").value;
     console.log(idea + " " + id);
     try {
-        const response = await fetch("http://localhost:3000/ideas/updateIdea", {
+        const response = await fetch("https://server-diaibk8c.b4a.run/ideas/updateIdea", {
             method: "PUT",
             mode: "cors",
             headers: {
