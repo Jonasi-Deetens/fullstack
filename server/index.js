@@ -6,9 +6,7 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors({
-    origin: '*'
-}));
+app.use(cors());
 app.use(express.json());
 
 import ideas from "./Routers/ideaRouter.js";
