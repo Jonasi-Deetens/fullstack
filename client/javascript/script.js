@@ -10,7 +10,6 @@ const deleteIdea = async (id) => {
     try {
         const response = await fetch("https://server-diaibk8c.b4a.run/ideas/deleteIdea", {
             method: "DELETE",
-            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
                 // 'Content-Type': 'application/x-www-form-urlencoded',

@@ -7,7 +7,6 @@ document.getElementById("updateIdeaForm").addEventListener("submit", async (even
     try {
         const response = await fetch("https://server-diaibk8c.b4a.run/ideas/updateIdea", {
             method: "PUT",
-            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
               },

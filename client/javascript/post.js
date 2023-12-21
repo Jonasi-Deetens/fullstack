@@ -6,7 +6,6 @@ document.getElementById("ideaForm").addEventListener("submit", async (event) => 
     try {
         const response = await fetch("https://server-diaibk8c.b4a.run/ideas/addIdea", {
             method: "POST",
-            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
                 // 'Content-Type': 'application/x-www-form-urlencoded',
